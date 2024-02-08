@@ -1,0 +1,66 @@
+﻿<Window x:Class="ТА.Пароли.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ТА.Пароли" xmlns:viewmodel="clr-namespace:ТА.Пароли.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="700" Background="Transparent" WindowStyle="None" AllowsTransparency="True">
+
+    <Window.DataContext>
+        <viewmodel:VM_MainWindow/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/photo_2024-02-07_10-29-27.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="black" MouseLeftButtonDown="Moving">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="0.5" Direction="-90"/>
+            </Grid.Effect>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Menu  Background="#00000000" IsMainMenu="True"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                <Button Grid.Column="1" Content="_" Style="{StaticResource Menu_Button}"  FontSize="10"  Click="Hide" />
+                <Button Grid.Column="1" Content="X" Style="{StaticResource Menu_Button}"  FontSize="10"  Click="Exit"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Проектирование" Command="{Binding Open_Designers}" Width="120" Margin="15,5,5,5" Style="{StaticResource Main_Button}"/>
+                <Button Content="Управление" Command="{Binding Open_Managers}" Width="120" Margin="5" Style="{StaticResource Main_Button}"/>
+                <Button Content="Conta" Command="{Binding Open_Conta}" Width="80" Margin="5" Style="{StaticResource Main_Button}"/>
+                <Button Content="Монтаж" Command="{Binding Open_Installers}" Width="80" Margin="5" Style="{StaticResource Main_Button}"/>
+                <Button Content="Сервис" Command="{Binding Open_Services}" Width="80" Margin="5" Style="{StaticResource Main_Button}"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden"/>
+        </Grid>
+        <Grid Grid.Row="3" Margin="15,0,15,5" Visibility="Hidden">
+            <Border CornerRadius="15" Background="#7F000000">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="5" BlurRadius="17" Direction="-90" Opacity="1"></DropShadowEffect>
+                </Border.Effect>
+            </Border>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Text="{Binding Pass}" Width="80" Height="20" Margin="15,5,15,10" FontSize="14" FontWeight="Bold" IsReadOnly="True"/>
+                <Button Content="Добавить" Width="100" Height="30" Command="{Binding Add_User}" Margin="0,5,0,10" Style="{StaticResource Main_Button}" />
+                <Button Content="Удалить" Width="100" Height="30" Command="{Binding Remove_User}" Margin="5,5,0,10" Style="{StaticResource Main_Button}"/>
+                <Button Content="Сохранить" Width="100" Height="30" Command="{Binding Save_Configuration}" Margin="25,5,0,10" Style="{StaticResource Main_Button}"/>
+                <Button Content="Редактировать" Width="100" Height="30" Command="{Binding Edit_Mode}" Margin="5,5,0,10" Style="{StaticResource Main_Button}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
